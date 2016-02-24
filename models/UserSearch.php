@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\TblGoods;
+use app\models\User;
 
 /**
- * TblGoodsSearch represents the model behind the search form about `app\models\TblGoods`.
+ * UserSearch represents the model behind the search form about `app\models\User`.
  */
-class TblGoodsSearch extends TblGoods
+class UserSearch extends User
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class TblGoodsSearch extends TblGoods
     public function rules()
     {
         return [
-            [['id', 'count'], 'integer'],
-            [['name', 'email_provider', 'create_date'], 'safe'],
+            [['id'], 'integer'],
+            [['username', 'name', 'surname', 'password', 'salt', 'access_token', 'create_date'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class TblGoodsSearch extends TblGoods
      */
     public function search($params)
     {
-        $query = TblGoods::find();
+        $query = User::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,12 +57,15 @@ class TblGoodsSearch extends TblGoods
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'count' => $this->count,
             'create_date' => $this->create_date,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'email_provider', $this->email_provider]);
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'surname', $this->surname])
+            ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'salt', $this->salt])
+            ->andFilterWhere(['like', 'access_token', $this->access_token]);
 
         return $dataProvider;
     }
