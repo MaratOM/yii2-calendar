@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
-                <a href="/index.php?r=user/create" class="btn btn-primary">Sign up</a>
+                <a href="/user/create" class="btn btn-primary">Sign up</a>
             </div>
         </div>
 
